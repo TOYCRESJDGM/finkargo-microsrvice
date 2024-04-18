@@ -1,0 +1,15 @@
+uvicorn
+sqlalchemy
+requests
+charset-normalizer
+boto3
+python-dotenv
+mysqlclient
+fastapi
+fastapi_utils
+PyJWT
+cryptography
+bs4
+scikit-learn
+apscheduler
+mysql-connector-python

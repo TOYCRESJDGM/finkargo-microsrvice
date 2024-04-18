@@ -1,0 +1,830 @@
+openapi: 3.0.0
+info:
+  title: Microservice - Finkargo
+  version: 0.1.0
+paths:
+  /:
+    get:
+      summary: Home
+      operationId: home__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /user/register:
+    post:
+      tags:
+        - users
+      summary: Register User
+      description: |-
+        register and create a user
+        :return:
+      operationId: register_user_user_register_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Register User User Register Post
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /user/login:
+    post:
+      tags:
+        - users
+      summary: Auth User
+      description: |-
+        login a user
+        :return:
+      operationId: auth_user_user_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuth'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Auth User User Login Post
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /entity/create:
+    post:
+      tags:
+        - entity
+      summary: Create Entity
+      description: |-
+        create a entity
+        :return:
+      operationId: create_entity_entity_create_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Create Entity Entity Create Post
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /entity/:
+    get:
+      tags:
+        - entity
+      summary: Get Entities
+      description: |-
+        Get all entities
+        :return:
+      operationId: get_entities_entity__get
+      parameters:
+        - required: false
+          schema:
+            type: integer
+            title: Location Id
+          name: location_id
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Get Entities Entity  Get
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /entity/{id}:
+    get:
+      tags:
+        - entity
+      summary: Get Entity
+      description: |-
+        Get a single entity
+        :return:
+      operationId: get_entity_entity__id__get
+      parameters:
+        - required: true
+          schema:
+            type: integer
+            title: Id
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Get Entity Entity  Id  Get
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    put:
+      tags:
+        - entity
+      summary: Update Entity
+      description: |-
+        Update a entity
+        :return:
+      operationId: update_entity_entity__id__put
+      parameters:
+        - required: true
+          schema:
+            type: integer
+            title: Id
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Update Entity Entity  Id  Put
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /entity/delete/{id}:
+    put:
+      tags:
+        - entity
+      summary: Soft Delete Entity
+      description: Soft delete an entity by setting the 'deleted' flag to True.
+      operationId: soft_delete_entity_entity_delete__id__put
+      parameters:
+        - required: true
+          schema:
+            type: integer
+            title: Id
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntitySoftDelete'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /position/create:
+    post:
+      tags:
+        - position
+      summary: Create Position
+      description: |-
+        create a position
+        :return:
+      operationId: create_position_position_create_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PositionCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Create Position Position Create Post
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /position/:
+    get:
+      tags:
+        - position
+      summary: Get Positions
+      description: |-
+        Get all positions
+        :return:
+      operationId: get_positions_position__get
+      parameters:
+        - required: false
+          schema:
+            type: integer
+            title: Entity Id
+          name: entity_id
+          in: query
+        - required: false
+          schema:
+            type: string
+            title: Name
+          name: name
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Get Positions Position  Get
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /position/{id}:
+    get:
+      tags:
+        - position
+      summary: Get Position
+      description: |-
+        Get a single position
+        :return:
+      operationId: get_position_position__id__get
+      parameters:
+        - required: true
+          schema:
+            type: integer
+            title: Id
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Get Position Position  Id  Get
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    put:
+      tags:
+        - position
+      summary: Update Position
+      description: |-
+        Update a position
+        :return:
+      operationId: update_position_position__id__put
+      parameters:
+        - required: true
+          schema:
+            type: integer
+            title: Id
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PositionUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Update Position Position  Id  Put
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /position/delete/{id}:
+    put:
+      tags:
+        - position
+      summary: Soft Delete Position
+      description: Soft delete an position by setting the 'deleted' flag to True.
+      operationId: soft_delete_position_position_delete__id__put
+      parameters:
+        - required: true
+          schema:
+            type: integer
+            title: Id
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PositionUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /nps/register:
+    post:
+      tags:
+        - nps
+      summary: Register Nps
+      description: |-
+        register a nps
+        :return:
+      operationId: register_nps_nps_register_post
+      parameters:
+        - required: false
+          schema:
+            type: string
+            title: Authorization
+          name: authorization
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NpsCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Register Nps Nps Register Post
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /nps/:
+    get:
+      tags:
+        - nps
+      summary: Get Positions
+      description: |-
+        Get all nps
+        :return:
+      operationId: get_positions_nps__get
+      parameters:
+        - required: false
+          schema:
+            type: string
+            title: Position Name
+          name: position_name
+          in: query
+        - required: false
+          schema:
+            type: integer
+            title: Entity Id
+          name: entity_id
+          in: query
+        - required: false
+          schema:
+            type: integer
+            title: User Id
+          name: user_id
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Get Positions Nps  Get
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /nps/general/reports:
+    get:
+      tags:
+        - nps
+      summary: General Reports
+      description: |-
+        Get all nps
+        :return:
+      operationId: general_reports_nps_general_reports_get
+      parameters:
+        - required: false
+          schema:
+            type: integer
+            title: Option
+            default: 1
+          name: option
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response General Reports Nps General Reports Get
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /nps/reports/low_score/{entity_id}:
+    get:
+      tags:
+        - nps
+      summary: Reports Low Score
+      description: |-
+        Gets all the users who have rated the company low
+        :return:
+      operationId: reports_low_score_nps_reports_low_score__entity_id__get
+      parameters:
+        - required: true
+          schema:
+            type: integer
+            title: Entity Id
+          name: entity_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Reports Low Score Nps Reports Low Score  Entity Id  Get
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    EntityCreate:
+      properties:
+        entityName:
+          type: string
+          title: Entityname
+        locationId:
+          type: integer
+          title: Locationid
+        type:
+          type: string
+          title: Type
+        creationDate:
+          type: string
+          format: date-time
+          title: Creationdate
+        ModificationDate:
+          type: string
+          format: date-time
+          title: Modificationdate
+        deleted:
+          type: boolean
+          title: Deleted
+          default: false
+      type: object
+      required:
+        - entityName
+        - locationId
+        - type
+      title: EntityCreate
+    EntitySoftDelete:
+      properties:
+        entityName:
+          type: string
+          title: Entityname
+        locationId:
+          type: integer
+          title: Locationid
+        type:
+          type: string
+          title: Type
+        creationDate:
+          type: string
+          format: date-time
+          title: Creationdate
+        ModificationDate:
+          type: string
+          format: date-time
+          title: Modificationdate
+        deleted:
+          type: boolean
+          title: Deleted
+          default: false
+      type: object
+      title: EntitySoftDelete
+    EntityUpdate:
+      properties:
+        entityName:
+          type: string
+          title: Entityname
+        locationId:
+          type: integer
+          title: Locationid
+        type:
+          type: string
+          title: Type
+        creationDate:
+          type: string
+          format: date-time
+          title: Creationdate
+        ModificationDate:
+          type: string
+          format: date-time
+          title: Modificationdate
+        deleted:
+          type: boolean
+          title: Deleted
+          default: false
+      type: object
+      title: EntityUpdate
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    NpsCreate:
+      properties:
+        score:
+          type: integer
+          title: Score
+        positionId:
+          type: integer
+          title: Positionid
+        userId:
+          type: integer
+          title: Userid
+        userAgent:
+          type: string
+          title: Useragent
+        operatingSystem:
+          type: string
+          title: Operatingsystem
+        creationDate:
+          type: string
+          format: date-time
+          title: Creationdate
+        ModificationDate:
+          type: string
+          format: date-time
+          title: Modificationdate
+        deleted:
+          type: boolean
+          title: Deleted
+          default: false
+        type:
+          type: string
+          title: Type
+      type: object
+      required:
+        - score
+        - positionId
+      title: NpsCreate
+    PositionCreate:
+      properties:
+        positionName:
+          type: string
+          title: Positionname
+        entityId:
+          type: integer
+          title: Entityid
+        creationDate:
+          type: string
+          format: date-time
+          title: Creationdate
+        ModificationDate:
+          type: string
+          format: date-time
+          title: Modificationdate
+        deleted:
+          type: boolean
+          title: Deleted
+          default: false
+      type: object
+      required:
+        - positionName
+        - entityId
+      title: PositionCreate
+    PositionUpdate:
+      properties:
+        positionName:
+          type: string
+          title: Positionname
+        entityId:
+          type: integer
+          title: Entityid
+        creationDate:
+          type: string
+          format: date-time
+          title: Creationdate
+        ModificationDate:
+          type: string
+          format: date-time
+          title: Modificationdate
+        deleted:
+          type: boolean
+          title: Deleted
+          default: false
+      type: object
+      title: PositionUpdate
+    UserAuth:
+      properties:
+        email:
+          type: string
+          title: Email
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+        - email
+        - password
+      title: UserAuth
+    UserCreate:
+      properties:
+        userName:
+          type: string
+          title: Username
+        email:
+          type: string
+          title: Email
+        phone:
+          type: string
+          title: Phone
+        password:
+          type: string
+          title: Password
+        creationDate:
+          type: string
+          format: date-time
+          title: Creationdate
+        ModificationDate:
+          type: string
+          format: date-time
+          title: Modificationdate
+        deleted:
+          type: boolean
+          title: Deleted
+          default: false
+      type: object
+      required:
+        - userName
+        - email
+        - phone
+        - password
+      title: UserCreate
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: token
